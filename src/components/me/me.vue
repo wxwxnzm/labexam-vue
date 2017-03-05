@@ -3,10 +3,10 @@
 	  <div class="my-info">
 	  	<h2>用户信息</h2>
 	  	<div class="info-list">
-	  		<label for="infoName">用户名<input id="infoName" type='text' :value='myInfo.name'></input></label>
-	  		<label for="infoEmail">邮箱<input id="infoEmail" type='text' :value='myInfo.email'></input></label>
-	  		<label for="infoPhone">电话<input id="infoPhone" type='text' :value='myInfo.phone'></input></label>
-	  		<label for="infoNumber">编号<input id="infoNumber" type='text' :value='myInfo.number'></input></label>
+	  		<p><label for="infoName">用户名</label><input id="infoName" type='text' :value='myInfo.name'></input></p>
+	  		<p><label for="infoEmail">邮箱</label><input id="infoEmail" type='text' :value='myInfo.email'></input></p>
+	  		<p><label for="infoPhone">电话</label><input id="infoPhone" type='text' :value='myInfo.phone'></input></p>
+	  		<p><label for="infoNumber">编号</label><input id="infoNumber" type='text' :value='myInfo.number'></input></p>
 	  		<button class="submit">修改</button>
 	  	</div>
 	  </div>
@@ -197,11 +197,13 @@
 	      color: #00bc9b
 	      padding: 33px
 	      width: 100%
-	      &>label
-	        width: 100%
-	        &>input
-	          text-align: center
-	          border: 1px solid
+	      &>p>label
+	        width: 100px
+	        display: inline-block
+	        padding: 3px
+	      &>p>input
+	        text-align: center
+	        border: 1px solid
 	      &>.submit
 	        float: right
 </style>
