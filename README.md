@@ -1,17 +1,17 @@
-# ss
+# labexam-vue
 
-> app
+> 顾名思义就是用vue写的实验室考试(系统)网站
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 跑在静态服务器上
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 ```
 
