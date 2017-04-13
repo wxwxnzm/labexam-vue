@@ -78,14 +78,36 @@
     position: relative;
     margin: 55px 100px;
   }
-  .jiao {
-    background-color: rgba(0, 0, 0, 0.96);
-    text-align: center;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.79);
+  .footer-wrapper>.footer1{
+    background: url('../static/img/footbg.jpg');
+    height: 160px;
+    width: 100%;
+    min-width: 960px;
+    display: flex;
+    justify-content: center;
+    align-items: center
   }
-  .jiao>p {
-    line-height: 20px;
+  .footer-wrapper>.footer2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 960px;
+    width: 100%;
+    background-color: #30363c;
+    height: 90px;
+    color: #4d6a8d;
+    font-size: 12px;
+     flex-direction:column;
   }
+  .footer-wrapper>.footer1>ul>li {
+    float: left;
+    padding: 0 2px;
+    color: #ffffff;
+  }
+  .footer-wrapper>.footer1>ul>li>a {
+        font-size: 14px;
+      color: #ffffff;
+  }
+
 </style>
 

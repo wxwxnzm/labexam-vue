@@ -1,28 +1,33 @@
 <template>
 	<div id='main'>
-		<img class="image1" src="/static/img/home_image1.png" alt="">
-		<div id='count-img' v-show='status'></div>
-		<div v-show='status' class="login-box">
-                <ul class="roles-tabs">
-                    <li :class="{active:iscur === index}" v-for='(role,index) in roles' @click='iscur = index'>{{role.name}}</li>
-                </ul>
-                <!-- 选项卡面板 -->
-                <div class="tab-content">
-                            <label>name</label>	
-                            <input id='tab_userName' v-model='loginData.name' type="text" class="form-control" :placeholder="roles[iscur].name+'号'">
+		<!-- <img class="image1" src="/static/img/home_image1.png" alt="">
+		
+		<div class="main-wrapper">
+			<div id='count-img' v-show='status'></div>
+			<div v-show='status' class="login-box">
+			                <ul class="roles-tabs">
+			                    <li :class="{active:iscur === index}" v-for='(role,index) in roles' @click='iscur = index'>{{role.name}}</li>
+			                </ul>
+			                选项卡面板
+			                <div class="tab-content">
+			                            <label>name</label>	
+			                            <input id='tab_userName' v-model='loginData.name' type="text" class="form-control" :placeholder="roles[iscur].name+'号'">
+		
+			                            <label>password</label>
+			                            <input v-model='loginData.password' type="password" id="tab_password" name="password" class="form-control" placeholder="密码">
+		
+			                            <input v-model='loginData.code' type="text" id="tab_yanzhengma" name="code" class="form-control" placeholder="验证码">
+			                            <img id="tab_ima_yzm" src="http://localhost/labexam/user/code" @click='changeImg'>
+			                </div>
+					<button @keyup.enter='login' @click='login'>登录</button>
+			        </div>
+			<div v-for='(wab,index) in wabs' class="home-box" :style='{order: (index+1)*2,flex: wab.flex}'>
+				<div class="title border-1px">{{wab.title}}<router-link :to="wab.name">更多...</router-link ></div>
+				<div class="content">{{wab.content[0].title}}</div>
+			</div>
+		</div> -->
 
-                            <label>password</label>
-                            <input v-model='loginData.password' type="password" id="tab_password" name="password" class="form-control" placeholder="密码">
-
-                            <input v-model='loginData.code' type="text" id="tab_yanzhengma" name="code" class="form-control" placeholder="验证码">
-                            <img id="tab_ima_yzm" src="http://localhost/labexam/user/code" @click='changeImg'>
-                </div>
-				<button @keyup.enter='login' @click='login'>登录</button>
-        </div>
-		<div v-for='(wab,index) in wabs' class="home-box">
-			<div class="title border-1px">{{wab.title}}<router-link :to="wab.name">更多...</router-link ></div>
-			<div class="content">{{wab.content[0].title}}</div>
-		</div>
+		<img class="swun" src="../../../static/img/Home.jpg" alt="" width="">
 	</div>
 </template>
 
@@ -56,16 +61,16 @@
 					}
 				],
 				loginData: {
-					name: 'gjx',
-					password: '987654',
+					name: '',
+					password: '',
 					code: '',
 					role: 'user'
 				},
 				wabs: [
-				{title: '通知公告', name: 'tips', content: [{title: '11月份考试通知'}]},
-				{title: '规章制度', name: 'rules', content: [{title: '11月份考试通知'}]},
-				{title: '安全标示', name: 'flags', content: [{title: '11月份考试通知'}]},
-				{title: '课件资料', name: 'coursewares', content: [{title: '11月份考试通知'}]}
+					{title: '通知公告', name: 'tips', content: [{title: '11月份考试通知'}], flex: 3},
+					{title: '规章制度', name: 'rules', content: [{title: '11月份考试通知'}], flex: 2},
+					{title: '安全标志', name: 'flags', content: [{title: '11月份考试通知'}], flex: 3},
+					{title: '学习资料', name: 'coursewares', content: [{title: '11月份考试通知'}], flex: 2}
 				]
 			};
 		},
@@ -74,7 +79,7 @@
 		mounted() {
 			var myChart = echarts.init(document.getElementById('count-img'));
 			// 绘制图表
-			myChart.setOption({
+			var options = {
 			    title: {
 			        text: '各班成绩/人数统计'
 			    },
@@ -145,8 +150,10 @@
 			            areaStyle: {normal: {}},
 			            data: [3, 2, 4, 6, 12, 3]
 			        }
-			    ]
-			});
+			    ],
+			    borderColor: '#eee'
+			};
+			myChart.setOption(options);
 		},
 		methods: {
 			login() {
@@ -213,7 +220,7 @@
 	};
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<!-- <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/minix.styl"
 	#main
 	  background-color: #F2F2F2
@@ -224,53 +231,72 @@
 	  text-align: center
 	  .image1
 	    width: 100%
-	  #count-img
-	    height: 290px
-	    width: 33%
-	    border: 1px solid #eee
-	    float: left
-	  .login-box
-	    height: 300px
-	    float: right
-	    width: 33%
-	    margin: 0 auto
-	    border: 1px solid #eee
-	    box-shadow: 0px 1px 5px #AAAAAA
-	    .roles-tabs
-	      display: flex
-	      li
-	        height: 40px
-	        line-height: 40px
-	        border-radius: 4px
-	        color: white
-	        flex: 1
-	        text-align: center
-	        &.active
-	          background-color: #337ab7
-	          &:hover
+	  .main-wrapper
+	    display: flex
+	    flex-wrap: wrap
+	    #count-img
+	      height: 290px
+	      min-width: 28%
+	      flex: 2
+	      order: 1
+	      border: 1px solid #eee
+	      box-shadow: 0px 1px 5px #AAAAAA
+	    .login-box
+	      flex: 2
+	      order: 3
+	      min-width: 28%
+	      height: 28%
+	      border: 1px solid #eee
+	      box-shadow: 0px 1px 5px #AAAAAA
+	      &>.roles-tabs
+	        display: flex
+	        &>li
+	          height: 40px
+	          line-height: 40px
+	          border-radius: 4px
+	          color: white
+	          flex: 1
+	          background-color: #64bde6
+	          text-align: center
+	          &.active
 	            background-color: #337ab7
-	        &:hover
-	          background-color: rgba(238, 238, 238, 0.7)
-	          cursor:pointer 
-	  .home-box
-	    float: left
-	    width: 32.5%
-	    min-width: 27%
-	    min-height: 290px
-	    margin: 2px
-	    padding: 1px
-	    border: 1px solid #eee
-	    box-shadow: 0px 1px 5px #AAAAAA
-	    &:hover>.title
-	      color: white
-	    &>.title
-	      position: relative
-	      display: inline-block
-	      width: 100%
-	      background: linear-gradient(to left,  #fff 0%,rgba(8, 151, 217, 0.8) 100%)
-	      &>a
-	        position: absolute
-	        font-size: 14px
-	        right: 5px
-	        top: 5px
+	            font-size: 18px
+	            &:hover
+	              background-color: #337ab7
+	          &:hover
+	            background-color: #3dace0
+	            cursor:pointer
+	            font-size: 18px
+	    .home-box
+	      min-width: 28%
+	      min-height: 290px
+	      margin: 2px
+	      padding: 1px
+	      border: 1px solid #eee
+	      box-shadow: 0px 1px 5px #AAAAAA
+	      background-color: white
+	      &:hover>.title
+	        color: white
+	      &>.title
+	        position: relative
+	        display: inline-block
+	        width: 100%
+	        background: linear-gradient(to left,  #fff 0%,rgba(8, 151, 217, 0.8) 100%)
+	        &>a
+	          position: absolute
+	          font-size: 14px
+	          right: 5px
+	          top: 5px
+	      &>.content
+	        padding: 10px
+</style> -->
+<style lang="stylus" rel="stylesheet/stylus">
+	#main
+	  width: 100%
+	  height: 100%
+	  padding: 0
+	  margin: 0 auto
+	  .swun
+	    width: 100%
+	    min-width: 1280px
 </style>

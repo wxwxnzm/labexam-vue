@@ -90,8 +90,6 @@
 					window.localStorage.setItem('userTopics', JSON.stringify(topics));
 				},
 				deep: true
-			},
-			'$route'(to, from) {
 			}
 		},
 		created() {
@@ -126,6 +124,7 @@
 					this.userAnswers = JSON.parse(window.localStorage.getItem('userInfo'));
 				}
 			// }
+			this.$parent.$emit('hideHeader');
 		},
 		methods: {
 			read(index) {
@@ -157,7 +156,8 @@
 				const params = {
 					time: window.localStorage.getItem('time'),
 					user_id: window.localStorage.getItem('myId'),
-					testInfo: JSON.parse(window.localStorage.getItem('userInfo')).filter(index => index !== null)
+					testInfo: JSON.parse(window.localStorage.getItem('userInfo')).filter(index => index !== null),
+					terminate: formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
 				};
 				const _type = this.$route.name;
 				const api = 'api/' + _type + '/submit';

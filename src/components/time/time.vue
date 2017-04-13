@@ -27,8 +27,8 @@
 		methods: {
 			deadline() {
 				var minutes,
-				seconds,
-				usertime;
+				seconds;
+				var usertime = 0;
 				if (this.times > 0) {
 					minutes = Math.floor(this.times / 60);
 					seconds = Math.floor(this.times % 60);

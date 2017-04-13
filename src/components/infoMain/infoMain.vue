@@ -1,10 +1,10 @@
 <template>
 	<div class='info-main'>
 		<div class="title">{{infoTitle}}</div>
-		<div class="img-wrapper" v-if='infoList[0].url' >
+		<div class="img-wrapper" v-if='infoList[0].url' v-cloak>
 			<div class="img-item" v-for='data in infoList'>
 			
-				<img :src='data.url' alt="无图无真相啊">
+				<img  :src='data.url' alt="无图无真相啊">
 			</div> 
 		</div>
 		<div class="wrapper" v-else>

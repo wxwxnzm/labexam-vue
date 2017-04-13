@@ -1,30 +1,30 @@
 <template>
-	<nav style='min-width: 1050px' class="navbar navbar-inverse navbar-fixed-top">
-	    <div class="navbar-header">
-	        <router-link to="/home" class="navbar-brand">西南民族大学<span>实验室安全知识培训系统</span></router-link>
-	    </div>
-	    <div class="navbar-collapse">
-	        <ul class="nav navbar-nav">
-				<li class="dd" v-if='headInfos' v-for='(menu,index) in headInfos'>
-					<div v-if='menu.child.length !== 0'>{{menu.nav_title}}<span  class="caret"></span></div>
-					<ul v-if='menu.child.length !== 0' class="dropdown-menu">
-						<li v-for='subject in menu.child'>
-							<router-link :to="{name: menu.nav_name, params: {subId: subject.nav_subid ,subName: subject.nav_title}}">{{subject.nav_title}}</router-link>
-						</li>
-					</ul>
-					<router-link v-else :to='{name: menu.nav_name}'>{{menu.nav_title}}</router-link>
-				</li>
-				
+	<header id="header">
+		<img src="../../../static/img/logo.jpg" class="logo" width='51px' height='51px'>
+		<ul class="nav-first">
+			<li v-for='menu in headInfos' class="nav-item">
+				<div @click='clickMe(menu.nav_name)'>{{menu.nav_title}}</div>
+				<ul v-if='menu.child.length !== 0' class="nav-second">
+					<li v-for='subject in menu.child' class="nav-second-item" @click.prevent='clickMe(menu.nav_name,subject.nav_subid)'>
+						<!-- <router-link :to="{name: menu.nav_name, params: {subId: subject.nav_subid ,subName: subject.nav_title}}"  @click.prevent='clickMe'>{{subject.nav_title}}</router-link> -->
+						{{subject.nav_title}}
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<el-popover
+		ref="popover4"
+		placement="bottom"
+		width="400"
+		trigger="click">
+			<el-input v-model='userName' placeholder='用户名'></el-input>	
+			<el-input v-model='password' type='password' placeholder='密码'></el-input>	
+		</el-popover>
+		<el-button v-if='' type="primary" icon="information" class='login_btn' @click='' v-popover:popover4>登录</el-button>
 
-	            <li v-show='status'>
-	            	<router-link to="/me">我的</router-link>
-	            </li>
-	            <li class="dd" v-show='status' id="li_nav_back">
-					<div @click='offLine'>退出</div>
-	            </li>
-	        </ul>
-	    </div>
-	</nav>
+	
+
+	</header>
 </template>
 
 <script type="text/ecmascript-6">
@@ -34,7 +34,10 @@
 			return {
 				headInfos: [],
 				subjects: [],
-				userName: ''
+				userName: '',
+				password: '',
+				headerShow: true,
+				dialogTableVisible: false
 			};
 		},
 		created() {
@@ -42,6 +45,10 @@
 				console.log(response.body);
 				this.headInfos = response.body;
 			});
+			this.$parent.$on('hideHeader', function() {
+				console.log('want to hide header!');
+				this.headerShow = false;
+				});
 		},
 		methods: {
 			Animos(value) {
@@ -50,37 +57,78 @@
 			offLine() {
 				this.$parent.$emit('offline');
 				this.$router.replace('/home');
+			},
+			clickMe(name, id) {
+				if (id) {
+					this.$router.push('/' + name + '/' + id);
+				}
+				else if (name === 'tips' || name === 'flags' || name === 'rules' || name === 'coursewares' || name === 'home') {
+					this.$router.push('/' + name);
+				}
+			},
+			login() {
+				// this.$router
 			}
 		},
 		computed: {
 			status: function() {
 				return this.online;
+			},
+			showHeader() {
+				return this.headerShow;
+			}
+		},
+		watch: {
+			'$route'(to, from) {
 			}
 		}
 	};
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	.dd
-	  &:hover>.dropdown-menu
-	    display: block
-	  &.open
-	    background-color: #080808
-	    & > div
-	      color: #fff
-	  & > div
-	    line-height:40px
-	    margin: 5px 10px 5px 10px
-	    color: #9d9d9d
-	    cursor: pointer
-	    &:hover
-	      color: #fff
-	.nav-header
-	  background-color: #222222
-	  border-color: #101010
+	#header
 	  position: fixed
-	  left: 0
 	  top: 0
+	  left: 0
+	  min-width: 960px
 	  width: 100%
-	  color: rgb(157, 157, 157)
+	  height: 56px
+	  background-color: #ffffff
+	  z-index: 1
+	  .logo
+	    margin: 0px 30px
+	    cursor: pointer
+	    float: left
+	  .nav-first
+	    height: 56px
+	    max-width: 1000px
+	    float: left
+	    .nav-item
+	      float: left
+	      width: 94px
+	      line-height: 56px
+	      color: #333333
+	      font-size: 14px
+	      text-align: center
+	      position: relative
+	      &:hover
+	        background-color: #f2f2f2
+	        cursor: pointer
+	        .nav-second
+	          display: block
+	      .nav-second
+	        display: none
+	        width: 110px
+	        position: absolute
+	        .nav-second-item
+	          height: 46px
+	          color: #333333
+	          text-align: left
+	          line-height: 46px
+	          &:hover
+	            background-color: #007ee5
+	            color: #ffffff
+	  .login_btn
+	    margin: 10px 30px
+	    width: 90px
 </style>
