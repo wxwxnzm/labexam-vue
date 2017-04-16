@@ -1,6 +1,6 @@
 <template>
 	<header id="header">
-		<img src="../../../static/img/logo.jpg" class="logo" width='51px' height='51px'>
+		<img src="../../../static/img/logo.jpg" class="logo" width='51px' height='51px' @click="toHome">
 		<ul class="nav-first">
 			<li v-for='menu in headInfos' class="nav-item">
 				<div @click='clickMe(menu.nav_name)'>{{menu.nav_title}}</div>
@@ -17,12 +17,12 @@
 		placement="bottom"
 		width="400"
 		trigger="click">
-			<el-input v-model='userName' placeholder='用户名'></el-input>	
-			<el-input v-model='password' type='password' placeholder='密码'></el-input>	
+			<el-input v-model='userName' placeholder='用户名'></el-input>
+			<el-input v-model='password' type='password' placeholder='密码'></el-input>
 		</el-popover>
 		<el-button v-if='' type="primary" icon="information" class='login_btn' @click='' v-popover:popover4>登录</el-button>
 
-	
+
 
 	</header>
 </template>
@@ -68,7 +68,10 @@
 			},
 			login() {
 				// this.$router
-			}
+			},
+      toHome() {
+			    this.$router.push('/');
+      }
 		},
 		computed: {
 			status: function() {

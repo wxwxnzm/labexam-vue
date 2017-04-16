@@ -67,7 +67,7 @@
   70%  {top:190px;}
   75%  {top:200px;opacity: 1}
   100% {top:-1000px;opacity: 0}
-  }  
+  }
   @keyframes haoka
   {
   0%   {top:-1000;}
@@ -76,7 +76,7 @@
   }
   .viewrela {
     position: relative;
-    margin: 55px 100px;
+    /*margin: 55px 100px;*/
   }
   .footer-wrapper>.footer1{
     background: url('../static/img/footbg.jpg');
