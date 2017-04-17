@@ -119,6 +119,7 @@
 	        cursor: pointer
 	        .nav-second
 	          display: block
+	          background-color: #ffffff
 	      .nav-second
 	        display: none
 	        width: 110px
@@ -128,6 +129,7 @@
 	          color: #333333
 	          text-align: left
 	          line-height: 46px
+	          padding: 2px 15px
 	          &:hover
 	            background-color: #007ee5
 	            color: #ffffff

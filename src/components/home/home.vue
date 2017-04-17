@@ -6,12 +6,13 @@
         <div class="box tips-box">
           <h4>系统公告</h4>
           <ul class="box-main">
-            <li class="box-item">
+            <li class="box-item" v-for='tip in tips'>
               <i class="date-ball"></i>
               <i class="date-line"></i>
-              <div class="date">2013-01-15</div>
-              <router-link to="tips">date+title</router-link>
+              <div class="date">{{tip.time}}</div>
+              <router-link to="tips">{{tip.title}}</router-link>
             </li>
+            <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
@@ -22,10 +23,36 @@
       </div>
       <div class="info-item">
         <img src="../../../static/img/Content2.jpg" alt="">
-        <div class="box roles-box">规章制度</div>
+        <div class="box coursewares-box">
+          <h4>课件资料</h4>
+          <ul class="box-main">
+            <!-- <li class="box-item" v-for='courseware in coursewares'>
+              <i class="date-ball"></i>
+              <i class="date-line"></i>
+              <div class="date">{{courseware.time}}</div>
+              <router-link to="tips">{{courseware.title}}</router-link>
+            </li> -->
+            <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
+
+          </ul>
+          <el-button class="read-more">阅读更多</el-button>
+        </div>
       </div>
       <div class="info-item">
-        <div class="box coursewares-box">课件资料</div>
+        <div class="box roles-box">
+          <h4>规章制度</h4>
+          <ul class="box-main">
+<!--             <li class="box-item" v-for='rule in rules'>
+              <i class="date-ball"></i>
+              <i class="date-line"></i>
+              <div class="date">{{rule.time}}</div>
+              <router-link to="tips">{{rule.title}}</router-link>
+            </li> -->
+            <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
+
+          </ul>
+          <el-button class="read-more">阅读更多</el-button>
+        </div>
         <img src="../../../static/img/Content3.jpg" alt="">
       </div>
     </div>
@@ -91,12 +118,36 @@
 					{title: '规章制度', name: 'rules', content: [{title: '11月份考试通知'}], flex: 2},
 					{title: '安全标志', name: 'flags', content: [{title: '11月份考试通知'}], flex: 3},
 					{title: '学习资料', name: 'coursewares', content: [{title: '11月份考试通知'}], flex: 2}
-				]
+				],
+				tips: [],
+				coursewares: [],
+				rules: []
 			};
 		},
 		created() {
+			this.getInfo();
 		},
 		methods: {
+			getInfo() {
+				this.$http.get('api/alltips').then((response) => {
+					console.log(response);
+					this.tips = response.data;
+				}, (error) => {
+					console.log(error);
+				});
+				this.$http.get('api/allcousewares').then((response) => {
+					console.log(response);
+					this.coursewares = response.data;
+				}, (error) => {
+					console.log(error);
+				});
+				this.$http.get('api/allrules').then((response) => {
+					console.log(response);
+					this.rules = response.data;
+				}, (error) => {
+					console.log(error);
+				});
+			},
 			login() {
 				this.loginData.role = this.roles[this.iscur].role;
 				this.$http.post('api/user/login', this.loginData).then((response) => {
@@ -168,7 +219,7 @@
       padding: 0
       margin: 0 auto
       &>.swun
-        min-width: 1280px
+        width: 100%
       &>.info-wrapper
         margin-top: 65px
         min-height: 880px
@@ -176,12 +227,17 @@
           float: left
           height: 0
           padding-bottom: 64%
+          width: 33.3%
+          img
+            width: 100%
           .box
             height: 480px
             padding: 40px
             text-align: center
             color: #ffffff
             &>.box-main
+              max-height: 300px
+              overflow: auto
               &>.box-item
                 position relative
                 height 87px
@@ -216,19 +272,20 @@
               width 180px
               height: 60px
               border-radius: 35px
+              color: #000000
           .tips-box
             background-color: #70E6C6
-            & .read-more
+            & .read-more:hover
               border-color: #70E6C6
               color: #70E6C6
           .roles-box
             background-color: #05b2fe
-            & .read-more
+            & .read-more:hover
               border-color: #05B2FE
               color: #05B2FE
           .coursewares-box
             background-color: #007ee5
-            & .read-more
+            & .read-more:hover
               border-color: #007EE5
               color: #007EE5
       &>.link-to
