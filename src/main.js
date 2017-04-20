@@ -10,6 +10,7 @@ import me from './components/me/me.vue';
 import result from './components/result/result.vue';
 import learn from './components/learn/learn.vue';
 import information from './components/information/information.vue';
+import login from './components/login.vue';
 import elementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 Vue.use(VueRouter);
@@ -17,8 +18,9 @@ Vue.use(VueResource);
 Vue.use(elementUI);
 
 const routes = [
-  { path: '/', redirect: '/home' },
+  { path: '/', redirect: '/index' },
   { path: '/home', name: 'home', component: home },
+  { path: '/index', name: 'index', component: login },
   { path: '/me', component: me },
   { path: '/essay', component: learn },
   { path: '/exam/:subId', name: 'exam', component: doTopic },
