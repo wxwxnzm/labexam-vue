@@ -1,10 +1,14 @@
 <template>
 	<div class="login">
 		<div class="login-box">
-			<h3>统一身份认证</h3>
+			<div class="title">统一身份认证服务</div>
 			<ul>
 				<li>学生</li>
+				<li class="inner">|</li>
+				
 				<li>教师</li>
+				<li class="inner">|</li>
+				
 				<li>管理员</li>
 			</ul>
 			<el-input placeholder='账号'></el-input>
@@ -38,10 +42,9 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 	.login
-	  width: 100%
-	  min-height: 700px
-	  min-width: 1200px
-	  background: url('../../static/img/Loginbg.png')
+	  width: 1237px
+	  height: 520px
+	  background: url('../../static/img/loginbg.jpg')
 	  .login-box
 	    width: 280px
 	    height: 300px
@@ -50,17 +53,27 @@
 	    margin-right: 150px
 	    margin-top: 200px
 	    border-radius: 4px
-	    h3
+	    .title
 	      text-align: center
+	      color: #007ee5
+	      padding: 24px 40px
 	    ul
-	      margin: 3px
-	      padding: 3px
+	      margin: 10px
+	      padding: 8px
 	      background-color: #159eee
+	      border-radius: 3px
 	      overflow: hidden
 	      li
 	        float: left
-	        width: 70px
 	        text-align:center
+	        color: #ffffff
+	        padding: 8px 15px
+	        border-radius: 13px
+	        border: 1px solid #ffffff
+	        margin: 0 3px
+	      li.inner
+	        padding: 0px
+	        border-style: none
 	    button
 	      width: 100px
 	      margin: 0 auto

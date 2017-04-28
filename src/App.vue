@@ -108,6 +108,9 @@
         font-size: 14px;
       color: #ffffff;
   }
+  .viewrela {
+    min-width: 1260px;
+  }
 
 </style>
 
