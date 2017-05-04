@@ -17,12 +17,26 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(elementUI);
 
+Vue.http.interceptors.push((request, next) => {
+  next((response) => {
+    // ...
+    // 请求发送后的处理逻辑
+    // ...
+    // 根据请求的状态，response参数会返回给successCallback或errorCallback
+    if (response.ok && response.status === 200) {
+      return response;
+    } else if (!response.ok) {
+      return '访问失败:' + response.url;
+      // Vue.$message.error('访问失败:' + response.url);
+    }
+  });
+});
 const routes = [
-  { path: '/', redirect: '/index' },
+  { path: '/', redirect: '/home' },
   { path: '/home', name: 'home', component: home },
-  { path: '/index', name: 'index', component: login },
-  { path: '/me', component: me },
-  { path: '/essay', component: learn },
+  { path: '/index', name: 'login', component: login },
+  { path: '/me', name: 'me', component: me },
+  { path: '/essay', name: 'essay', component: learn },
   { path: '/exam/:subId', name: 'exam', component: doTopic },
   { path: '/learn/:subId', name: 'learn', component: learn },
   { path: '/pratice/:subId', name: 'pratice', component: doTopic },
@@ -30,7 +44,8 @@ const routes = [
   { path: '/tips', name: 'tips', component: information },
   { path: '/rules', name: 'rules', component: information },
   { path: '/coursewares', name: 'coursewares', component: information },
-  { path: '/flags', name: 'flags', component: information }
+  { path: '/flags', name: 'flags', component: information },
+  { path: '*', redirect: '/home' }
 ];
 const router = new VueRouter({
   routes,

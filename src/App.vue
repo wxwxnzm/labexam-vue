@@ -1,12 +1,9 @@
 <template>
   <div id="app">
-    <v-header :online='online' ref='headerAni'></v-header>
+    <v-header v-show="headerShow"></v-header>
     <transition name='guodu'>
-    <!-- <keep-alive> -->
-      <router-view class='viewrela' :online='online'></router-view>
-    <!-- </keep-alive> -->
+      <router-view class='viewrela'></router-view>
     </transition>
-
     <goTop></goTop>
   </div>
 </template>
@@ -19,32 +16,43 @@
       'v-header': header,
       goTop
     },
+    computed: {
+      needOnline () {
+//        const routerNames = ['home', 'login', 'me', 'essay', 'exam', 'learn', 'pratice', 'moni', 'tips', 'rules', 'coursewares', 'flags'];
+        const routerNames = ['me', 'exam', 'learn', 'pratice', 'moni'];
+        let tag = false;
+        var _self = this;
+        routerNames.forEach((name, index) => {
+          if (_self.$route.name === name) {
+            tag = true;
+          }
+        });
+        return tag;
+      }
+      },
     data() {
       return {
-        online: window.localStorage.getItem('online') === 'true'
+        headerShow: true
       };
     },
     watch: {
-      online: {
-        handler: function (online) {
-          window.localStorage.setItem('online', online);
-        },
-        deep: true
-      },
-      dataStop: {
-        handler: function(dataStop) {
-          console.log('我变了' + dataStop);
-        },
-        deep: true
+      '$route'(to, form) {
+        // 判断用户是否登录过,
+        if (this.needOnline) {
+          this.$message({
+            type: 'warning',
+            message: '请登录'
+          });
+          this.$router.push('/index');
+          this.headerShow = false;
+        }
+          this.headerShow = (to.name !== 'login');
       }
     },
     created() {
-      this.$on('successAni', function() {
-        this.online = true;
-      });
-      this.$on('offline', function() {
-        this.online = false;
-      });
+      if (this.$route.name === 'login') {
+        this.headerShow = false;
+      }
     }
   };
 </script>

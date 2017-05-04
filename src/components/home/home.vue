@@ -130,84 +130,30 @@
 		methods: {
 			getInfo() {
 				this.$http.get('api/alltips').then((response) => {
-					console.log(response);
 					this.tips = response.data;
-				}, (error) => {
-					console.log(error);
-				});
+				}).catch((error) => {
+          this.$message.error(error);
+        });
 				this.$http.get('api/allcousewares').then((response) => {
-					console.log(response);
 					this.coursewares = response.data;
-				}, (error) => {
-					console.log(error);
-				});
+				}).catch((error) => {
+            this.$message.error(error);
+        });
 				this.$http.get('api/allrules').then((response) => {
-					console.log(response);
 					this.rules = response.data;
-				}, (error) => {
-					console.log(error);
-				});
-			},
-			login() {
-				this.loginData.role = this.roles[this.iscur].role;
-				this.$http.post('api/user/login', this.loginData).then((response) => {
-					response = response.body;
-					this.login_success(response);
-				});
-				// // for test
-				// this.$parent.$emit('successAni');
-			},
-			login_success(data) {
-				if (data.msg === `0`)
-				{
-					console.log(`验证码不正确!`);
-					this.changeImg();
-				}
-				else if (data.msg === `1`)
-				{
-				    console.log(`用户名不存在！`);
-				    this.changeImg();
-				}
-				else if (data.msg === `2`)
-				{
-				    console.log(`密码错误！`);
-				    this.changeImg();
-				}
-				else if (data.msg === `3`)
-				{
-					// 储存登录的用户信息
-					this.userInfoStorage(data.user[0].name, data.user[0]['user_id']);
-					// 慢慢消失的动画
-				    this.$parent.$emit('successAni');
-				}
-				else if (data.msg === `4`)
-				{ // 登录管理员
-				  window.location.href = `http://localhost/labexam/index`;
-				}
-				else
-				{
-				  console.log(`用户角色不符！`);
-				}
-			},
-			changeImg() {
-				var code = document.getElementById('tab_ima_yzm');
-				code.setAttribute('src', 'http://localhost/labexam/user/code?' + Math.random());
-			},
-			userInfoStorage(name, id) {
-		        window.localStorage.setItem(`myName`, name);
-		        window.localStorage.setItem(`myId`, id);
-		        // 本地存储用户信息
+				}).catch((error) => {
+          this.$message.error(error);
+        });
 			},
 			getApi(url) {
 				this.$http.get('api/' + 'all' + url).then((response) => {
 						this.listData = response.body;
-				});
+				}).catch((error) => {
+          this.$message.error(error);
+        });
 			}
 		},
 		computed: {
-			status: function() {
-				return !(this.online);
-			}
 		}
 	};
 </script>

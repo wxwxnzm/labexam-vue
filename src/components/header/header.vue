@@ -12,15 +12,7 @@
 				</ul>
 			</li>
 		</ul>
-		<el-popover
-		ref="popover4"
-		placement="bottom"
-		width="400"
-		trigger="click">
-			<el-input v-model='userName' placeholder='用户名'></el-input>
-			<el-input v-model='password' type='password' placeholder='密码'></el-input>
-		</el-popover>
-		<el-button v-if='' type="primary" icon="information" class='login_btn' @click='' v-popover:popover4>登录</el-button>
+		<el-button v-if='' type="primary" icon="information" class='login_btn' @click='toLogin'>登录</el-button>
 
 
 
@@ -29,7 +21,7 @@
 
 <script type="text/ecmascript-6">
 	export default {
-		props: ['online'],
+//		props: ['online'],
 		data() {
 			return {
 				headInfos: [],
@@ -42,18 +34,12 @@
 		},
 		created() {
 			this.$http.get('api/nav').then((response) => {
-				console.log(response.body);
-				this.headInfos = response.body;
-			});
-			this.$parent.$on('hideHeader', function() {
-				console.log('want to hide header!');
-				this.headerShow = false;
-				});
+				this.headInfos = response.data;
+			}).catch((error) => {
+        this.$message.error(error);
+      });
 		},
 		methods: {
-			Animos(value) {
-				console.log('Animos');
-			},
 			offLine() {
 				this.$parent.$emit('offline');
 				this.$router.replace('/home');
@@ -66,20 +52,14 @@
 					this.$router.push('/' + name);
 				}
 			},
-			login() {
-				// this.$router
+			toLogin() {
+				 this.$router.push('/index');
 			},
       toHome() {
 			    this.$router.push('/');
       }
 		},
 		computed: {
-			status: function() {
-				return this.online;
-			},
-			showHeader() {
-				return this.headerShow;
-			}
 		},
 		watch: {
 			'$route'(to, from) {
