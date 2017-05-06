@@ -6,7 +6,7 @@
 				<div @click='clickMe(menu.nav_name)'>{{menu.nav_title}}</div>
 				<ul v-if='menu.child.length !== 0' class="nav-second">
 					<li v-for='subject in menu.child' class="nav-second-item" @click.prevent='clickMe(menu.nav_name,subject.nav_subid)'>
-						<!-- <router-link :to="{name: menu.nav_name, params: {subId: subject.nav_subid ,subName: subject.nav_title}}"  @click.prevent='clickMe'>{{subject.nav_title}}</router-link> -->
+						<!-- <router-link :to="{name: menu.nav_name, params: {subsubjectsject.nav_subid ,subNasubjectsject.nav_title}}"  @click.prevent='clickMesubjectsject.nav_title}}</router-link> -->
 						{{subject.nav_title}}
 					</li>
 				</ul>
@@ -35,8 +35,8 @@
 		created() {
 			this.$http.get('api/nav').then((response) => {
 				this.headInfos = response.data;
-			}).catch((error) => {
-        this.$message.error(error);
+			}, (error) => {
+        console.log(error);
       });
 		},
 		methods: {
@@ -53,7 +53,7 @@
 				}
 			},
 			toLogin() {
-				 this.$router.push('/index');
+				 this.$router.push('/login');
 			},
       toHome() {
 			    this.$router.push('/');

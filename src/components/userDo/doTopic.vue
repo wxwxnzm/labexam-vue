@@ -3,7 +3,7 @@
 
 		<div v-if='!result.length' class="header">
 			<transition name='tip'>
-				<div v-if='show' class="tips">做题过程中请勿中途退出</div>				
+				<div v-if='show' class="tips">做题过程中请勿中途退出</div>
 			</transition>
 			<div class="subname">{{exam_name}}</div>
 			<examtime :minutes='exam_time'></examtime>
@@ -32,7 +32,7 @@
 
 
 		<result v-if='result.length' :result='result' :score='userScore'></result>
-		
+
 		<div class="footer" v-if='type === 1'>
 			<div  @click ='pergpage'>上一题</div>
 			<div class="sbumit" @click='postAnswers'>提交</div>
@@ -46,9 +46,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-	import topicContent from 'components/topicContent/topicContent';
-	import result from 'components/result/result';
-	import examtime from 'components/time/time';
+	import topicContent from 'components/component/topicContent';
+	import result from 'components/userDo/result';
+	import examtime from 'components/userDo/time';
 	import {formatDate} from '../../common/js/date.js';
 	var handlerDatas = function(datas) {
 		var topics = [];

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-	import topicContent from 'components/topicContent/topicContent';
+	import topicContent from 'components/component/topicContent';
 	function handleData(apiData) {
 		var topics = [];
 		for (var i = 0; i < apiData.length; i++) {

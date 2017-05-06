@@ -1,6 +1,6 @@
 <template>
     <div id='goTop' @click='goTop' v-show = 'toTop'>
-      <img src="/static/img/goTop.png">
+      <img src="/static/img/goTop.svg">
     </div>
 </template>
 <script>
@@ -97,7 +97,7 @@
 	    }
 	};
 </script>
-	
+
 <style >
 	#goTop {
 	    display: block;

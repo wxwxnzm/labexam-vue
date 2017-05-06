@@ -41,9 +41,9 @@
 //          if (response)
 
 //          this.login_success(response);
-        }).catch((error) => {
+        }, (error) => {
+            console.log(error);
           this.$router.push('/home');
-          this.$message.error(error);
         });
       },
       login_success(data) {
@@ -97,7 +97,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .login
-    width: 1237px
+    width: 100%
     height: 520px
     background: url('../../static/img/loginbg.jpg') no-repeat
     background-size: 100%

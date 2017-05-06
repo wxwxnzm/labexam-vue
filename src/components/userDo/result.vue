@@ -2,7 +2,7 @@
 	<div class="result">
 		<div class="score" v-show='score'>
 			总分:{{score}}
-		</div>	
+		</div>
 		<!-- {{result}} -->
 		<div class="topic" v-for='(topic,index) in result'>
 			<topicContent :topic ='result[index]' :_select = '0'></topicContent>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import topicContent from 'components/topicContent/topicContent';
+	import topicContent from 'components/component/topicContent';
 	export default {
 		props: {
 			result: {
@@ -39,6 +39,6 @@
 	    font-size: 34px
 	  &>.topic
 	    border: 1px solid rgba(66,185,131,0.57)
-	    margin: 2px 40px 
+	    margin: 2px 40px
 	    padding: 2px
 </style>

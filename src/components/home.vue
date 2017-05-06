@@ -1,6 +1,6 @@
 <template>
 	<div id='main'>
-		<img class="swun" src="../../../static/img/Home.jpg">
+		<img class="swun" src="../../static/img/Home.jpg">
     <div class="info-wrapper">
       <div class="info-item">
         <div class="box tips-box">
@@ -17,12 +17,12 @@
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
           </ul>
-          <el-button class="read-more">阅读更多</el-button>
+          <el-button class="read-more" @click="toTips">阅读更多</el-button>
         </div>
-        <img src="../../../static/img/Content1.jpg" alt="">
+        <img src="../../static/img/Content1.jpg" alt="">
       </div>
       <div class="info-item">
-        <img src="../../../static/img/Content2.jpg" alt="">
+        <img src="../../static/img/Content2.jpg" alt="">
         <div class="box coursewares-box">
           <h4>课件资料</h4>
           <ul class="box-main">
@@ -35,7 +35,7 @@
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
 
           </ul>
-          <el-button class="read-more">阅读更多</el-button>
+          <el-button class="read-more" @click="toCousewares">阅读更多</el-button>
         </div>
       </div>
       <div class="info-item">
@@ -51,27 +51,27 @@
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
 
           </ul>
-          <el-button class="read-more">阅读更多</el-button>
+          <el-button class="read-more" @click="toRules">阅读更多</el-button>
         </div>
-        <img src="../../../static/img/Content3.jpg" alt="">
+        <img src="../../static/img/Content3.jpg" alt="">
       </div>
     </div>
     <div class="link-to">
       <div class="link-wrapper">
         <a href="www.swun.edu.cn">
-          <img src="../../../static/img/link1.jpg" alt="">
+          <img src="../../static/img/link1.jpg" alt="">
           <span>西南民族大学</span>
         </a>
         <a href="">
-          <img src="../../../static/img/link2.jpg" alt="">
+          <img src="../../static/img/link2.jpg" alt="">
           <span>资产与实验管理处</span>
         </a>
         <a href="">
-          <img src="../../../static/img/link3.jpg" alt="">
+          <img src="../../static/img/link3.jpg" alt="">
           <span>西南民族大学保卫处</span>
         </a>
         <a href="">
-          <img src="../../../static/img/link4.jpg" alt="">
+          <img src="../../static/img/link4.jpg" alt="">
           <span>国家安全生产总局</span>
         </a>
       </div>
@@ -81,44 +81,12 @@
 
 <script type="text/ecmascript-6">
 //	import echarts from 'echarts';
+  import {mapActions} from 'vuex';
 
-	var userStore = {
-		save(data) {
-			var datas = JSON.stringify(data);
-			window.localStorage.setItem('USERKEY', datas);
-		}
-	};
 	export default {
 		props: ['online'],
 		data() {
 			return {
-				iscur: 1,
-				roles: [
-					{
-						role: `user`,
-						name: `学生`
-					},
-					{
-						role: `tea`,
-						name: `教职工`
-					},
-					{
-						role: `admin`,
-						name: `管理员`
-					}
-				],
-				loginData: {
-					name: '',
-					password: '',
-					code: '',
-					role: 'user'
-				},
-				wabs: [
-					{title: '通知公告', name: 'tips', content: [{title: '11月份考试通知'}], flex: 3},
-					{title: '规章制度', name: 'rules', content: [{title: '11月份考试通知'}], flex: 2},
-					{title: '安全标志', name: 'flags', content: [{title: '11月份考试通知'}], flex: 3},
-					{title: '学习资料', name: 'coursewares', content: [{title: '11月份考试通知'}], flex: 2}
-				],
 				tips: [],
 				coursewares: [],
 				rules: []
@@ -131,18 +99,18 @@
 			getInfo() {
 				this.$http.get('api/alltips').then((response) => {
 					this.tips = response.data;
-				}).catch((error) => {
-          this.$message.error(error);
+				}, (err) => {
+				    console.log(err);
         });
 				this.$http.get('api/allcousewares').then((response) => {
 					this.coursewares = response.data;
-				}).catch((error) => {
-            this.$message.error(error);
+				}, (err) => {
+          console.log(err);
         });
 				this.$http.get('api/allrules').then((response) => {
 					this.rules = response.data;
-				}).catch((error) => {
-          this.$message.error(error);
+				}, (err) => {
+          console.log(err);
         });
 			},
 			getApi(url) {
@@ -151,8 +119,24 @@
 				}).catch((error) => {
           this.$message.error(error);
         });
-			}
-		},
+			},
+      toTips() {
+			    this.setCurInfo('tips');
+			    console.log('gg');
+			    this.$router.push('/info');
+      },
+      toCousewares() {
+        this.setCurInfo('cousewares');
+        this.$router.push('/info');
+      },
+      toRules() {
+        this.setCurInfo('rules');
+        this.$router.push('/info');
+      },
+      ...mapActions([
+        'setCurInfo'
+      ])
+    },
 		computed: {
 		}
 	};
