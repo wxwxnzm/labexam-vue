@@ -147,13 +147,13 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .info
+    padding: 0 100px
     .bread
       width: 100%
       overflow: auto
       padding-top: 20px
     .info-wapper
       min-height: 800px
-
     /*i.home_span*/
       /*width 20px*/
       /*height 20px*/

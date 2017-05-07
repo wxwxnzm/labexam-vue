@@ -1,29 +1,27 @@
 <template>
 	<div class="time-warpper">
-		距离考试结束还有:{{msg}}
+		<el-button type="primary">{{msg}}</el-button>
 	</div>
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapGetters, mapActions} from 'vuex';
 	export default {
-		props: {
-			exam_time: {
-				type: Number,
-				default() {
-					return 60;
-				}
-			}
-		},
 		data() {
 			return {
 				msg: '',
-				times: 60 * this.exam_time,
+				times: 60 * this.minues,
 				timer: null
 			};
 		},
 		created() {
 			this.deadline();
 		},
+    computed: {
+      ...mapGetters({
+        minues: 'getTime'
+      })
+    },
 		methods: {
 			deadline() {
 				var minutes,

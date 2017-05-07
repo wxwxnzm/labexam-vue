@@ -3,24 +3,23 @@
 		<div class="score" v-show='score'>
 			总分:{{score}}
 		</div>
-		<!-- {{result}} -->
-		<div class="topic" v-for='(topic,index) in result'>
-			<topicContent :topic ='result[index]' :_select = '0'></topicContent>
+		 <!--{{result}}-->
+		<div class="topic" v-for="(topic, index) in result">
+			<topicContent :topic ="topic" :_select = '0'></topicContent>
 		</div>
 	</div>
 </template>
 
 <script>
 	import topicContent from 'components/component/topicContent';
+	import {mapGetters} from 'vuex';
 	export default {
-		props: {
-			result: {
-				type: Array
-			},
-			score: {
-				type: Number
-			}
-		},
+    computed: {
+      ...mapGetters({
+        score: 'getScore',
+        result: 'getAnswers'
+      })
+    },
 		created() {
 		},
 		components: {

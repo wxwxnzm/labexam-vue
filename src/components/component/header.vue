@@ -14,12 +14,12 @@
 		</ul>
 		<el-button v-if='' type="primary" icon="information" class='login_btn' @click='toLogin'>登录</el-button>
 
-
-
 	</header>
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapGetters, mapActions} from 'vuex';
+//  import timer from 'components/userDo/time';
 	export default {
 //		props: ['online'],
 		data() {
@@ -59,12 +59,18 @@
 			    this.$router.push('/');
       }
 		},
-		computed: {
-		},
+    computed: {
+      ...mapGetters({
+        time: 'getTime'
+      })
+    },
 		watch: {
 			'$route'(to, from) {
 			}
 		}
+//    components: {
+//      timer
+//    }
 	};
 </script>
 
@@ -74,7 +80,7 @@
     position: fixed
     top: 0
     left: 0
-    min-width: 960px
+    min-width: 1240px
     width: 100%
     height: 56px
     background-color: #ffffff
@@ -101,6 +107,7 @@
           .nav-second
             display: block
             background-color: #ffffff
+            border: 1px solid #3997e5
         .nav-second
           display: none
           width: 110px

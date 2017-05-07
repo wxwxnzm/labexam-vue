@@ -97,11 +97,11 @@
   .viewrela {
     position: relative;
     min-width: 1260px;
-    z-index: 50;
+    /*z-index: 50;*/
     /*margin: 55px 100px;*/
   }
   .appView {
-    margin: 65px 140px;
+    margin-top: 65px;
   }
 
 
