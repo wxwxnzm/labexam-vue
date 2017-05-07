@@ -10,7 +10,7 @@
     </el-steps>
     <div class="main">
       <div class="item" v-for="(topic,index) in curPageData">
-        <topicContent></topicContent>
+        <topicContent @doSelect="handleSelect"></topicContent>
       </div>
     </div>
     <div class="topic-footer">
@@ -23,6 +23,7 @@
 </template>
 <script type="text/ecmascript-6">
   import topicContent from 'components/component/topicContent';
+  import {mapGatters} from 'vuex';
   export default {
     data() {
       return {
@@ -30,8 +31,37 @@
         active: 7,
         gg: 30,
         curPageData: [6, 7, 8, 9, 10],
-        topics: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        topics: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        userAnswers: []
       };
+    },
+    created() {
+//      this.getTopics();
+    },
+    methods: {
+      handleSelect(topic) {
+        this.userAnswers[topic.id] = topic;
+      },
+      getTopics() {
+        let url = '/api/' + this.getDoType().subject + this.getDoType().type;
+        this.$http.get().then((res) => {
+          this.topics = res.data;
+        }).catch((err) => {
+          this.$message.error(err);
+        });
+      },
+      postTopics() {
+        this.$http.post().then((res) => {
+          this.topics = res.data;
+        }).catch((err) => {
+          this.$message.error(err);
+        });
+      }
+    },
+    computed: {
+      ...mapGatters({
+        doType: 'getDoType'
+      })
     },
     components: {
       topicContent

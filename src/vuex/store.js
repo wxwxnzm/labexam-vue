@@ -11,7 +11,7 @@ const INFO_SINGLE_SET = 'INFO_SINGLE_SET';
 
 const state = {
   curInfo: 'tips',
-  doType: {text: '', value: ''},
+  doType: {subject: '', type: ''},
   infoSingleType: ''
 };
 
