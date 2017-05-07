@@ -7,10 +7,12 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 const INFO_SET = 'INFO_SET';
 const DOTYPE_SET = 'DOTYPE_SET';
+const INFO_SINGLE_SET = 'INFO_SINGLE_SET';
 
 const state = {
   curInfo: 'tips',
-  doType: {text: '', value: ''}
+  doType: {text: '', value: ''},
+  infoSingleType: ''
 };
 
 const mutations = {
@@ -19,12 +21,16 @@ const mutations = {
   },
   [DOTYPE_SET](state, type) {
     state.doType = type;
+  },
+  [INFO_SINGLE_SET](state, single) {
+    state.infoSingleType = single;
   }
 };
 
 const getters = {
   getCurInfo: (state) => state.curInfo,
-  getDoType: (state) => state.doType
+  getDoType: (state) => state.doType,
+  getInfoSingleType: (state) => state.infoSingleType
 };
 
 const actions = {
@@ -33,6 +39,9 @@ const actions = {
   },
   setDoType: ({commit}, type) => {
     commit(DOTYPE_SET, type);
+  },
+  setInfoSingleType: ({commit}, single) => {
+    commit(INFO_SINGLE_SET, single);
   }
 };
 

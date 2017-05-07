@@ -30,7 +30,7 @@
 
 <style>
   .footer-wrapper{
-    height: 250px;
+    height: 160px;
     position: absolute;
     left:0;
     bottom:0;
@@ -40,7 +40,7 @@
   }
   .footer-wrapper>.footer1{
     background: url('../../../static/img/footbg.jpg');
-    height: 160px;
+    height: 100px;
     width: 100%;
     min-width: 960px;
     display: flex;
@@ -54,7 +54,7 @@
     min-width: 960px;
     width: 100%;
     background-color: #30363c;
-    height: 90px;
+    height: 60px;
     color: #4d6a8d;
     font-size: 12px;
     flex-direction:column;

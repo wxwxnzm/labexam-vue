@@ -24,7 +24,7 @@
       <div class="info-item">
         <img src="../../static/img/Content2.jpg" alt="">
         <div class="box coursewares-box">
-          <h4>课件资料</h4>
+          <h4>安全知识</h4>
           <ul class="box-main">
             <!-- <li class="box-item" v-for='courseware in coursewares'>
               <i class="date-ball"></i>
@@ -35,12 +35,12 @@
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
 
           </ul>
-          <el-button class="read-more" @click="toCousewares">阅读更多</el-button>
+          <el-button class="read-more" @click="toLearn">阅读更多</el-button>
         </div>
       </div>
       <div class="info-item">
         <div class="box roles-box">
-          <h4>规章制度</h4>
+          <h4>下载专区</h4>
           <ul class="box-main">
 <!--             <li class="box-item" v-for='rule in rules'>
               <i class="date-ball"></i>
@@ -51,7 +51,7 @@
             <li class="box-item"><i class="date-ball"></i><i class="date-line"></i><a href="">date+title</a></li>
 
           </ul>
-          <el-button class="read-more" @click="toRules">阅读更多</el-button>
+          <el-button class="read-more" @click="toDownLoad">阅读更多</el-button>
         </div>
         <img src="../../static/img/Content3.jpg" alt="">
       </div>
@@ -93,7 +93,7 @@
 			};
 		},
 		created() {
-			this.getInfo();
+//			this.getInfo();
 		},
 		methods: {
 			getInfo() {
@@ -125,12 +125,20 @@
 			    console.log('gg');
 			    this.$router.push('/info');
       },
-      toCousewares() {
-        this.setCurInfo('cousewares');
+//      toCousewares() {
+//        this.setCurInfo('coursewares');
+//        this.$router.push('/info');
+//      },
+//      toRules() {
+//        this.setCurInfo('rules');
+//        this.$router.push('/info');
+//      },
+      toDownLoad() {
+        this.setCurInfo('downLoad');
         this.$router.push('/info');
       },
-      toRules() {
-        this.setCurInfo('rules');
+      toLearn() {
+        this.setCurInfo('learn');
         this.$router.push('/info');
       },
       ...mapActions([

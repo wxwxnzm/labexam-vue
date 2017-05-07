@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import router from './router';
 import App from './App';
-
+import store from 'src/vuex/store.js'; // 管理web和考试
 import 'element-ui/lib/theme-default/index.css'; // ele组件样式
 
 import VueResource from 'vue-resource';
@@ -30,5 +30,6 @@ Vue.http.interceptors.push((request, next) => {
 
 new Vue({
   router: router,
+  store,
   render: h => h(App)
 }).$mount('#app');
