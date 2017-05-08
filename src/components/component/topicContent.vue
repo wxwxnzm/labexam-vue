@@ -101,6 +101,7 @@
           color: #B2BCD5
           text-indent: 5px
           &:hover
+            cursor pointer
             border: 1px solid #13CE66
             text-indent: 30px
             color: #4BC380

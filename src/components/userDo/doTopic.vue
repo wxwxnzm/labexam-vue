@@ -79,6 +79,7 @@
         this.topics = JSON.parse(window.localStorage.getItem('userTopics'));
         this.userAnswers = JSON.parse(window.localStorage.getItem('userInfo'));
         this.active = JSON.parse(window.localStorage.getItem('active'));
+        this.total = JSON.parse(window.localStorage.getItem('userTopica').length);
       }
     },
     watch: {
